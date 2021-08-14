@@ -1,0 +1,89 @@
+
+<% if @book.errors.any? %>
+<div id="error_explanation">
+
+  <h2><%= @book.errors.count %>error rohibited this book from being saved:</h2>
+    <ul>
+      <li>
+        <% @book.errors.full_messages.each do |message| %>
+        <%= message %>
+        <% end %>
+
+      </li>
+    </ul>
+  
+</div>
+<% end %>
+
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+
+<div class="profile-container">
+  <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+  <tbody>
+  <tr>
+    <th>name</th>
+	  <th><%= @user.name %></th>
+  </tr>
+  <tr>
+    <th>introduction</th>
+	  <th><%= @user.introduction %></th>
+	  <% if @user.id == current_user.id %>
+    <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+  <% end %>
+  </tr>
+</tbody>
+
+<h1>Books</h1>
+<body>
+  <table>
+
+
+<thead>
+    <tr>
+      <th>Title</th>
+      <th>Body</th>
+      <th colspan="3"></th>
+    </tr>
+</thead>
+
+  <tbody>
+    <% @books.each do |list| %>
+     <%= attachment_image_tag @user, :image %>
+      <tr>
+        <td>投稿ユーザー画像：<%= attachment_image_tag user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %></td>
+
+        <td><%= list.title %></td>
+
+        <td><%= list.body %></td>
+
+ 
+      </tr>
+    <% end %>
+  </tbody>
+
+
+
+
+
+</table>
+</body>
+
+
+
+<h2>New book</h2>
+<div class="field">
+
+
+<%= form_with model: @book,url:'books',local:true do |f| %>
+
+  <h4>Title</h4>
+  <%= f.text_field :title %>
+  <h4>Body</h4>
+  <%= f.text_area :body %>
+<%= f.submit 'Create Book' %>
+  <% end %>
+
+</div>
+
