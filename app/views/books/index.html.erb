@@ -17,8 +17,13 @@
           <tbody>
             <% @books.each do |list| %>
               <tr>
+                <td><%= link_to user_path(@user.id) do %>
+                    <%= attachment_image_tag @user, :profile_image, :fill, 10, 10, fallback: "no_image.jpg"%>
+                    <br><%= @user.name %>
+                    <% end %>
+                </td>
 
-                <td><%= list.title %></td>
+                <td><%= link_to 'list.title', book_path(@user.id) %></td>
 
                 <td><%= list.body %></td>
               </tr>
