@@ -1,9 +1,0 @@
-<% if book.errors.any? %>
-<div id="error_explanation">
-
-  <h2><%= book.errors.count %>error rohibited this book from being saved:</h2>
-    <ul>
-      <li>
-        <% book.errors.full_messages.each do |message| %>
-        <%= message %>
-        <% end %>

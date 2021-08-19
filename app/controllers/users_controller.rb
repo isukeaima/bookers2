@@ -8,13 +8,13 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @user = current_user
     @newbook = Book.new
     @books = @user.books.reverse_order
   end
 
   def edit
     @user = User.find(params[:id])
+    @user == current_user.id
   end
 
   def update
